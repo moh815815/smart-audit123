@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المدقق الذكي - منصة التدقيق المالي الاحترافية</title>
+  <meta name="description" content="منصة المدقق الذكي - منصة تدقيق مالي احترافية تعمل بالذكاء الاصطناعي لتحليل البيانات المالية واكتشاف التناقضات والأخطاء المحاسبية.">
+  <meta name="keywords" content="تدقيق مالي, محاسبة, ذكاء اصطناعي, ميزان المراجعة, تحليل مالي, برنامج محاسبة, منصة تدقيق">
+  <meta name="author" content="Smart Auditor Platform">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A192F">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="المدقق الذكي - منصة التدقيق المالي">
+  <meta property="og:description" content="منصة تدقيق مالي احترافية تعمل بالذكاء الاصطناعي لتحليل البيانات المالية.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_SA">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="المدقق الذكي - منصة التدقيق المالي">
+  <meta name="twitter:description" content="منصة تدقيق مالي احترافية تعمل بالذكاء الاصطناعي.">
+
+  <!-- Favicon (SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232ECC71'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-size='20' font-weight='bold' fill='%230A192F'%3Eم%3C/text%3E%3C/svg%3E">
+  <link rel="alternate icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAH1SURBVFiF7Ze7TsNAEEXPrNcECYmCj4CCK0QUVED5fygQH0BFQwUFCRUNSMgLCjq3KCIhYezYuyPFjmM7JOYnne74ztx7x2sD/5IQfIAN4DazJjOzzb+rJDIzmIEZM7ObzDp1UwJmYAbMbD+zTtWUoBmYATObyqxTMSVoBmbAzKYy61RMCZqBGTCzqcxaU5fg3Fq7Zq3dSCKzw0KBsLX2wFq7Ya19EhHZ1jczuwUC3lpLADZegP0KAUJrgd4iARgNA3ytAiE0ANdKAKMhHGutADBqLWAGY3ADxpI4NxoXMIM4KAxDGBsnsP3B3MptBmNwBqM0h1HrBKw1e/T3McaYvb+Bm0EbzPI8lsS51jGJ49hal5zzS0TUzjAMt9baHWsNxhhdKKVQKpVQqVTQ6XRQqVQwSRL4UgrX1xe4v7+du8+kUikUi0UAYKfTQbPZRKPRwMPDAwAgy7JJM8bgeR4AYJqmwXVJBL1eD4ZhYDweYzweAwD6/T4ajQaMMRgMBgCAKIoAAAsLC4E20zQBAEkSAQDiOA4+KYriOA6s0+mE3znnqNfrKJfLAIBKpYJWs4m1tTXU63WYpolisYh2u41yuYwoimCMQblcRrvdRqPRQKvVwmKxiCiKYIxBuVxGu91Go9FAsViE53kIgiA4oO/7CIIAf6BkMgM5YAYK4AdE3ZP7fQAAAABJRU5ErkJggg==">
+
+  <!-- Performance: preconnect to CDNs -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app" id="app">
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar" aria-label="القائمة الجانبية">
+      <div class="sidebar-brand">
+        <div class="logo-icon" aria-hidden="true">م</div>
+        <div>
+          <h1>المدقق الذكي</h1>
+          <span>منصة التدقيق المالي</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="القائمة الرئيسية">
+        <button class="nav-item active" data-page="dashboard" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">📊</span> لوحة التحكم
+        </button>
+        <button class="nav-item" data-page="ingestion">
+          <span class="nav-icon" aria-hidden="true">📂</span> استيراد البيانات
+        </button>
+        <button class="nav-item" data-page="auditor">
+          <span class="nav-icon" aria-hidden="true">🔍</span> المدقق الآلي
+          <span class="badge-count" id="findingsBadge" aria-label="عدد النتائج">0</span>
+        </button>
+        <button class="nav-item" data-page="reports">
+          <span class="nav-icon" aria-hidden="true">📄</span> تقارير التدقيق
+        </button>
+        <button class="nav-item" data-page="calculators">
+          <span class="nav-icon" aria-hidden="true">🧮</span> الحاسبات المالية
+        </button>
+        <button class="nav-item" data-page="admin">
+          <span class="nav-icon" aria-hidden="true">⚙️</span> لوحة الإدارة
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="avatar" aria-hidden="true">م</div>
+        <div class="user-info">
+          <div class="user-name">محمد أحمد</div>
+          <div class="user-role">مدقق مالي معتمد</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main" id="mainContent">
+      <!-- HEADER -->
+      <header class="header" role="banner">
+        <div class="header-right">
+          <button class="hamburger" id="hamburgerBtn" aria-label="فتح القائمة" title="القائمة">☰</button>
+          <div>
+            <h2 id="pageTitle">لوحة التحكم</h2>
+            <nav class="breadcrumb" id="breadcrumb" aria-label="مسار التنقل">الرئيسية / لوحة التحكم</nav>
+          </div>
+        </div>
+        <div class="header-left">
+          <button class="theme-toggle" id="themeToggle" title="تبديل السمة" aria-label="تبديل السمة">🌙</button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <!-- ===== PAGE: DASHBOARD ===== -->
+        <section id="page-dashboard" aria-label="لوحة التحكم">
+          <div class="grid-4" id="statsGrid">
+            <article class="stat-card green">
+              <div class="stat-icon" style="background:rgba(46,204,113,0.1);color:var(--green)" aria-hidden="true">💰</div>
+              <div class="stat-label">إجمالي الأصول</div>
+              <div class="stat-value" id="totalAssets">١٬٢٥٠٬٠٠٠</div>
+              <div class="stat-change up" aria-label="ارتفاع بنسبة ١٢٫٥٪">▲ ١٢٫٥٪ عن الربع السابق</div>
+            </article>
+            <article class="stat-card blue">
+              <div class="stat-icon" style="background:rgba(52,152,219,0.1);color:var(--blue)" aria-hidden="true">📋</div>
+              <div class="stat-label">الخصوم</div>
+              <div class="stat-value" id="totalLiabilities">٧٨٠٬٠٠٠</div>
+              <div class="stat-change down" aria-label="انخفاض بنسبة ٣٫٢٪">▼ ٣٫٢٪ عن الربع السابق</div>
+            </article>
+            <article class="stat-card gold">
+              <div class="stat-icon" style="background:rgba(243,156,18,0.1);color:var(--gold)" aria-hidden="true">📈</div>
+              <div class="stat-label">صافي الربح</div>
+              <div class="stat-value" id="netProfit">٤٧٠٬٠٠٠</div>
+              <div class="stat-change up" aria-label="ارتفاع بنسبة ٨٫٧٪">▲ ٨٫٧٪ عن الربع السابق</div>
+            </article>
+            <article class="stat-card red">
+              <div class="stat-icon" style="background:rgba(231,76,60,0.1);color:var(--red)" aria-hidden="true">⚠️</div>
+              <div class="stat-label">حالات عدم المطابقة</div>
+              <div class="stat-value" id="discrepancyCount">١٢</div>
+              <div class="stat-change down" aria-label="انخفاض بمقدار ٥">▼ ٥ عن الربع السابق</div>
+            </article>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">المؤشرات المالية</div>
+                  <div class="card-subtitle">تحليل النسب المالية الرئيسية</div>
+                </div>
+              </div>
+              <div class="grid-2" style="margin-bottom:16px">
+                <div>
+                  <div class="stat-label">نسبة المديونية</div>
+                  <div class="stat-value" style="font-size:20px" id="debtEquityRatio">٠٫٦٢</div>
+                  <div class="progress-bar" style="margin-top:8px" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-fill warning" style="width:62%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="stat-label">هامش الربح</div>
+                  <div class="stat-value" style="font-size:20px" id="profitMargin">٣٧٫٦٪</div>
+                  <div class="progress-bar" style="margin-top:8px" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-fill" style="width:38%"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="finHealthChart" aria-label="رسم بياني للمؤشرات المالية"></canvas>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">تحليل التدفق النقدي</div>
+                  <div class="card-subtitle">التدفقات النقدية الداخلة والخارجة</div>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="cashFlowChart" aria-label="رسم بياني للتدفقات النقدية"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">آخر المعاملات المدققة</div>
+                <div class="card-subtitle">أحدث ٥ معاملات في النظام</div>
+              </div>
+              <button class="btn btn-sm btn-outline" data-action="navigate" data-page="auditor">عرض الكل</button>
+            </div>
+            <div class="table-container">
+              <table aria-label="آخر المعاملات">
+                <thead>
+                  <tr><th>التاريخ</th><th>الوصف</th><th>المبلغ</th><th>الحالة</th><th>مدقق</th></tr>
+                </thead>
+                <tbody id="recentTransactions">
+                  <tr><td>٢٠٢٦-٠٥-١٠</td><td>مشتريات مواد خام</td><td>٤٥٬٠٠٠</td><td><span class="badge badge-correct">✔ سليم</span></td><td>النظام</td></tr>
+                  <tr><td>٢٠٢٦-٠٥-٠٩</td><td>مصروفات تشغيلية</td><td>١٢٬٥٠٠</td><td><span class="badge badge-warning">⚠ تنبيه</span></td><td>النظام</td></tr>
+                  <tr><td>٢٠٢٦-٠٥-٠٨</td><td>إيرادات مبيعات</td><td>٩٨٬٠٠٠</td><td><span class="badge badge-correct">✔ سليم</span></td><td>النظام</td></tr>
+                  <tr><td>٢٠٢٦-٠٥-٠٧</td><td>مصروف ضرائب</td><td>٢٢٬٣٠٠</td><td><span class="badge badge-critical">✘ خطأ</span></td><td>النظام</td></tr>
+                  <tr><td>٢٠٢٦-٠٥-٠٦</td><td>إهلاك أصول</td><td>٨٬٧٥٠</td><td><span class="badge badge-correct">✔ سليم</span></td><td>النظام</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== PAGE: INGESTION ===== -->
+        <section id="page-ingestion" style="display:none" aria-label="استيراد البيانات">
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">استيراد البيانات المالية</div>
+                  <div class="card-subtitle">رفع ملفات Excel أو CSV (ميزان المراجعة، دفتر الأستاذ)</div>
+                </div>
+              </div>
+              <div class="file-upload" id="fileDropZone">
+                <div class="upload-icon" aria-hidden="true">📁</div>
+                <div class="upload-text">ارفع ملف البيانات المالية هنا</div>
+                <div class="upload-hint">يدعم: .xlsx, .xls, .csv - أقصى حجم ١٠ ميجابايت</div>
+                <div class="upload-preview"></div>
+                <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" aria-label="اختيار ملف">
+              </div>
+              <div style="margin-top:16px">
+                <div class="form-group">
+                  <label for="dataType">نوع البيانات</label>
+                  <select class="form-control" id="dataType">
+                    <option value="trial">ميزان المراجعة</option>
+                    <option value="ledger">دفتر الأستاذ العام</option>
+                    <option value="journal">اليومية العامة</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="financialPeriod">الفترة المالية</label>
+                  <input type="text" class="form-control" id="financialPeriod" value="الربع الأول ٢٠٢٦">
+                </div>
+                <div class="btn-group">
+                  <button class="btn btn-primary btn-lg btn-process-file" style="flex:1" data-action="process-file">
+                    <span class="btn-spinner"></span>
+                    <span class="btn-text">↻ معالجة واستيراد البيانات</span>
+                  </button>
+                  <button class="btn btn-secondary btn-lg" data-action="export-data" title="تصدير البيانات">📤</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">البيانات المستوردة</div>
+                  <div class="card-subtitle">معاينة البيانات قبل التدقيق</div>
+                </div>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-secondary" data-action="export-data">📤 تصدير</button>
+                  <button class="btn btn-sm btn-secondary" data-action="clear-data">🧹 مسح</button>
+                </div>
+              </div>
+              <div class="table-container" style="max-height:400px;overflow-y:auto">
+                <table aria-label="البيانات المستوردة">
+                  <thead>
+                    <tr><th>#</th><th>الحساب</th><th>الوصف</th><th>مدين</th><th>دائن</th></tr>
+                  </thead>
+                  <tbody id="importedDataTable">
+                    <tr><td colspan="5" class="table-empty">
+                      <div class="table-empty-icon">📂</div>
+                      <div class="table-empty-text">لم يتم استيراد بيانات بعد</div>
+                      <div class="table-empty-hint">قم برفع ملف Excel أو CSV للبدء</div>
+                    </td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap" id="importStats"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== PAGE: AUDITOR ===== -->
+        <section id="page-auditor" style="display:none" aria-label="المدقق الآلي">
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">المدقق الآلي للذكاء الاصطناعي</div>
+                  <div class="card-subtitle">تحليل ذكي للبيانات المالية واكتشاف التناقضات</div>
+                </div>
+                <button class="btn btn-primary" data-action="run-audit">🔍 تشغيل التدقيق</button>
+              </div>
+              <div style="margin-bottom:16px">
+                <div class="grid-3" style="margin-bottom:12px">
+                  <div>
+                    <div class="stat-label">إجمالي المعاملات</div>
+                    <div class="stat-value" style="font-size:18px" id="auditTotalTxns">٠</div>
+                  </div>
+                  <div>
+                    <div class="stat-label">المعاملات السليمة</div>
+                    <div class="stat-value" style="font-size:18px;color:var(--green)" id="auditCorrectTxns">٠</div>
+                  </div>
+                  <div>
+                    <div class="stat-label">المعاملات المشبوهة</div>
+                    <div class="stat-value" style="font-size:18px;color:var(--red)" id="auditSuspiciousTxns">٠</div>
+                  </div>
+                </div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-fill" id="auditProgress" style="width:0%"></div>
+                </div>
+                <div class="progress-label" id="auditProgressLabel">بانتظار بدء التدقيق</div>
+              </div>
+              <div class="form-group">
+                <label for="auditSensitivity">حساسية التدقيق</label>
+                <select class="form-control" id="auditSensitivity">
+                  <option value="low">منخفضة - أقل عدد من التنبيهات</option>
+                  <option value="medium" selected>متوسطة - قياسية</option>
+                  <option value="high">عالية - أقصى اكتشاف للأخطاء</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">نتائج التدقيق</div>
+                  <div class="card-subtitle">التناقضات والأخطاء المكتشفة</div>
+                </div>
+                <span class="badge badge-neutral" id="findingsCount">٠ نتيجة</span>
+              </div>
+              <div id="findingsList" style="max-height:400px;overflow-y:auto">
+                <div class="empty-state">
+                  <div class="empty-state-icon">🔍</div>
+                  <div class="empty-state-title">بانتظار التدقيق</div>
+                  <div class="empty-state-desc">قم بتشغيل التدقيق لرؤية النتائج</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== PAGE: REPORTS ===== -->
+        <section id="page-reports" style="display:none" aria-label="تقارير التدقيق">
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">تقارير التدقيق</div>
+                  <div class="card-subtitle">إنشاء وتصدير تقارير التدقيق المالي</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="reportType">نوع التقرير</label>
+                <select class="form-control" id="reportType">
+                  <option value="full">تقرير تدقيق شامل</option>
+                  <option value="summary">ملخص تنفيذي</option>
+                  <option value="tax">تقرير تدقيق ضريبي</option>
+                  <option value="compliance">تقرير الامتثال</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="reportClient">العميل / الشركة</label>
+                <input type="text" class="form-control" id="reportClient" value="شركة التقنية المتطورة">
+              </div>
+              <div class="form-group">
+                <label for="reportPeriod">فترة التقرير</label>
+                <input type="text" class="form-control" id="reportPeriod" value="الربع الأول - ٢٠٢٦">
+              </div>
+              <div class="form-group">
+                <label for="reportNotes">ملاحظات إضافية</label>
+                <textarea class="form-control" id="reportNotes">تم تدقيق جميع القيود المحاسبية والتحقق من مطابقتها للمعايير المحاسبية الدولية.</textarea>
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-primary btn-lg" style="flex:1" data-action="generate-pdf">📄 تصدير PDF</button>
+                <button class="btn btn-secondary btn-lg" data-action="preview-report">معاينة</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">معاينة التقرير</div>
+                  <div class="card-subtitle">نموذج التقرير النهائي</div>
+                </div>
+              </div>
+              <div class="report-preview" id="reportPreview" aria-label="معاينة التقرير">
+                <div class="rep-header">
+                  <h3>تقرير التدقيق المالي</h3>
+                  <div style="color:var(--text-secondary);font-size:12px">شركة التقنية المتطورة - الربع الأول ٢٠٢٦</div>
+                </div>
+                <div class="rep-section"><strong>ملخص التدقيق:</strong><br>تم إجراء التدقيق على البيانات المالية للفترة المنتهية في ٣١ مارس ٢٠٢٦. أظهرت نتائج التدقيق وجود ١٢ حالة عدم تطابق تتطلب مراجعة.</div>
+                <div class="rep-section"><strong>النسب المالية الرئيسية:</strong><br>نسبة المديونية: ٠٫٦٢ | هامش الربح: ٣٧٫٦٪</div>
+                <div class="rep-section"><strong>التوصيات:</strong><br>١. مراجعة قيود المصروفات التشغيلية<br>٢. التحقق من حسابات الضرائب<br>٣. تدقيق حسابات الأصول الثابتة</div>
+                <div class="rep-footer">تقرير تم إنشاؤه بواسطة منصة المدقق الذكي - جميع الحقوق محفوظة</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== PAGE: CALCULATORS ===== -->
+        <section id="page-calculators" style="display:none" aria-label="الحاسبات المالية">
+
+          <div class="tabs" id="calcTabs" role="tablist">
+            <button class="tab active" data-calc="vat" role="tab" aria-selected="true">حاسبة الضريبة</button>
+            <button class="tab" data-calc="depreciation" role="tab" aria-selected="false">حاسبة الإهلاك</button>
+            <button class="tab" data-calc="ratios" role="tab" aria-selected="false">النسب المالية</button>
+          </div>
+
+          <!-- VAT -->
+          <div class="calc-pane" id="calc-vat" role="tabpanel">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">حاسبة ضريبة القيمة المضافة</div>
+                  <div class="card-subtitle">حساب ضريبة القيمة المضافة بدقة</div>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <div class="form-group">
+                    <label for="vatAmount">المبلغ الأساسي (بدون ضريبة)</label>
+                    <input type="number" class="form-control" id="vatAmount" value="100000">
+                  </div>
+                  <div class="form-group">
+                    <label for="vatRate">نسبة الضريبة (٪)</label>
+                    <input type="number" class="form-control" id="vatRate" value="15">
+                  </div>
+                  <div class="form-group">
+                    <label for="vatType">نوع الحساب</label>
+                    <select class="form-control" id="vatType">
+                      <option value="exclude">إضافة الضريبة للمبلغ</option>
+                      <option value="include">استخراج الضريبة من المبلغ</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <div class="calc-result" id="vatResultDisplay">
+                    <div style="font-size:14px;font-weight:400;margin-bottom:4px">قيمة الضريبة</div>
+                    <div id="vatResultValue">١٥٬٠٠٠ ر.س</div>
+                  </div>
+                  <div class="calc-details">
+                    <div class="calc-details-row"><span>المبلغ الأساسي:</span><span id="vatBaseDisplay">١٠٠٬٠٠٠ ر.س</span></div>
+                    <div class="calc-details-row" style="color:var(--red)"><span>قيمة الضريبة:</span><span id="vatTaxDisplay">١٥٬٠٠٠ ر.س</span></div>
+                    <div class="calc-details-row" style="font-weight:700;padding-top:8px;border-top:1px solid var(--border-color);color:var(--green)"><span>الإجمالي شامل الضريبة:</span><span id="vatTotalDisplay">١١٥٬٠٠٠ ر.س</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DEPRECIATION -->
+          <div class="calc-pane" id="calc-depreciation" style="display:none" role="tabpanel">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">حاسبة الإهلاك</div>
+                  <div class="card-subtitle">حساب إهلاك الأصول الثابتة (طريقة القسط الثابت)</div>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <div class="form-group">
+                    <label for="depCost">تكلفة الأصل</label>
+                    <input type="number" class="form-control" id="depCost" value="500000">
+                  </div>
+                  <div class="form-group">
+                    <label for="depSalvage">القيمة المتبقية (الخردة)</label>
+                    <input type="number" class="form-control" id="depSalvage" value="50000">
+                  </div>
+                  <div class="form-group">
+                    <label for="depLife">العمر الإنتاجي (سنوات)</label>
+                    <input type="number" class="form-control" id="depLife" value="10">
+                  </div>
+                </div>
+                <div>
+                  <div class="calc-result" id="depResultDisplay">
+                    <div style="font-size:14px;font-weight:400;margin-bottom:4px">الإهلاك السنوي</div>
+                    <div id="depResultValue">٤٥٬٠٠٠ ر.س</div>
+                  </div>
+                  <div class="calc-details">
+                    <div class="calc-details-row"><span>تكلفة الأصل:</span><span>٥٠٠٬٠٠٠ ر.س</span></div>
+                    <div class="calc-details-row"><span>القيمة المتبقية:</span><span>٥٠٬٠٠٠ ر.س</span></div>
+                    <div class="calc-details-row"><span>الأساس القابل للإهلاك:</span><span id="depBaseDisplay">٤٥٠٬٠٠٠ ر.س</span></div>
+                    <div class="calc-details-row"><span>الإهلاك الشهري:</span><span id="depMonthlyDisplay">٣٬٧٥٠ ر.س</span></div>
+                    <div class="calc-details-row" style="font-weight:700;padding-top:8px;border-top:1px solid var(--border-color);color:var(--green)"><span>الإهلاك السنوي:</span><span id="depAnnualDisplay">٤٥٬٠٠٠ ر.س</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RATIOS -->
+          <div class="calc-pane" id="calc-ratios" style="display:none" role="tabpanel">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">حاسبة النسب المالية</div>
+                  <div class="card-subtitle">تحليل الأداء المالي للشركة</div>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <div class="form-group"><label for="ratioAssets">إجمالي الأصول</label><input type="number" class="form-control" id="ratioAssets" value="1250000"></div>
+                  <div class="form-group"><label for="ratioLiabilities">إجمالي الخصوم</label><input type="number" class="form-control" id="ratioLiabilities" value="780000"></div>
+                  <div class="form-group"><label for="ratioEquity">حقوق الملكية</label><input type="number" class="form-control" id="ratioEquity" value="470000"></div>
+                  <div class="form-group"><label for="ratioNetProfit">صافي الربح</label><input type="number" class="form-control" id="ratioNetProfit" value="470000"></div>
+                  <div class="form-group"><label for="ratioRevenue">الإيرادات</label><input type="number" class="form-control" id="ratioRevenue" value="1250000"></div>
+                  <div class="form-group"><label for="ratioCurrentAssets">الأصول المتداولة</label><input type="number" class="form-control" id="ratioCurrentAssets" value="800000"></div>
+                  <div class="form-group"><label for="ratioCurrentLiabilities">الخصوم المتداولة</label><input type="number" class="form-control" id="ratioCurrentLiabilities" value="400000"></div>
+                </div>
+                <div>
+                  <div class="calc-details">
+                    <div class="calc-details-row" style="padding-bottom:8px;border-bottom:1px solid var(--border-color)"><span>نسبة المديونية:</span><span id="rDebtEquity" style="font-weight:700;color:var(--gold)">٠٫٦٢</span></div>
+                    <div class="calc-details-row" style="padding-bottom:8px;border-bottom:1px solid var(--border-color)"><span>هامش الربح:</span><span id="rProfitMargin" style="font-weight:700;color:var(--green)">٣٧٫٦٪</span></div>
+                    <div class="calc-details-row" style="padding-bottom:8px;border-bottom:1px solid var(--border-color)"><span>نسبة التداول:</span><span id="rCurrentRatio" style="font-weight:700;color:var(--blue)">٢٫٠٠</span></div>
+                    <div class="calc-details-row" style="padding-bottom:8px;border-bottom:1px solid var(--border-color)"><span>العائد على الأصول (ROA):</span><span id="rROA" style="font-weight:700;color:var(--green)">٣٧٫٦٪</span></div>
+                    <div class="calc-details-row"><span>العائد على حقوق الملكية (ROE):</span><span id="rROE" style="font-weight:700;color:var(--green)">١٠٠٫٠٪</span></div>
+                  </div>
+                  <div class="chart-container chart-container-sm" style="margin-top:16px">
+                    <canvas id="ratiosChart" aria-label="رسم بياني راداري للنسب المالية"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== PAGE: ADMIN ===== -->
+        <section id="page-admin" style="display:none" aria-label="لوحة الإدارة">
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">إدارة العملاء</div>
+                  <div class="card-subtitle">قائمة العملاء والملفات المالية</div>
+                </div>
+                <button class="btn btn-primary btn-sm" data-action="add-client">+ إضافة عميل</button>
+              </div>
+              <div class="table-container" style="max-height:400px;overflow-y:auto">
+                <table aria-label="قائمة العملاء">
+                  <thead><tr><th>اسم العميل</th><th>آخر تدقيق</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+                  <tbody id="clientTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">سجل التدقيق</div>
+                  <div class="card-subtitle">نشاطات التدقيق السابقة</div>
+                </div>
+              </div>
+              <div id="auditHistory">
+                <div class="audit-history-item" style="border-right-color:var(--green)">
+                  <div class="ah-header">
+                    <span class="status-pulse green"></span>
+                    <span class="ah-title">تدقيق شامل - شركة التقنية</span>
+                    <span class="badge badge-correct" style="margin-right:auto">مكتمل</span>
+                  </div>
+                  <div class="ah-desc">١٠ مايو ٢٠٢٦ - تم اكتشاف ٣ حالات عدم تطابق</div>
+                </div>
+                <div class="audit-history-item" style="border-right-color:var(--gold)">
+                  <div class="ah-header">
+                    <span class="status-pulse gold"></span>
+                    <span class="ah-title">تدقيق ضريبي - مؤسسة البناء</span>
+                    <span class="badge badge-warning" style="margin-right:auto">قيد المراجعة</span>
+                  </div>
+                  <div class="ah-desc">٢٨ أبريل ٢٠٢٦ - تم اكتشاف ٨ حالات عدم تطابق</div>
+                </div>
+                <div class="audit-history-item" style="border-right-color:var(--red)">
+                  <div class="ah-header">
+                    <span class="status-pulse red"></span>
+                    <span class="ah-title">تدقيق امتثال - المجموعة المالية</span>
+                    <span class="badge badge-critical" style="margin-right:auto">متأخر</span>
+                  </div>
+                  <div class="ah-desc">١٥ مارس ٢٠٢٦ - تم اكتشاف ١٥ حالة عدم تطابق</div>
+                </div>
+                <div class="audit-history-item" style="border-right-color:var(--blue)">
+                  <div class="ah-header">
+                    <span class="status-pulse blue"></span>
+                    <span class="ah-title">مراجعة دورية - التجارة الدولية</span>
+                    <span class="badge badge-info" style="margin-right:auto">مجدول</span>
+                  </div>
+                  <div class="ah-desc">١ يونيو ٢٠٢٦ - التدقيق القادم</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">إعدادات النظام</div>
+                <div class="card-subtitle">إدارة صلاحيات المستخدمين والإعدادات العامة</div>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div>
+                <div class="form-group"><label for="sysLang">لغة النظام</label><select class="form-control" id="sysLang"><option value="ar" selected>العربية</option><option value="en">English</option></select></div>
+                <div class="form-group"><label for="sysAccess">مستوى الوصول</label><select class="form-control" id="sysAccess"><option>مدقق رئيسي</option><option>مدقق مساعد</option><option>مشرف</option></select></div>
+              </div>
+              <div>
+                <div class="form-group"><label for="sysAlerts">التنبيهات التلقائية</label><select class="form-control" id="sysAlerts"><option value="1" selected>مفعلة</option><option value="0">معطلة</option></select></div>
+                <div class="form-group"><label for="sysRetention">فترة حفظ السجلات</label><select class="form-control" id="sysRetention"><option>٥ سنوات</option><option selected>١٠ سنوات</option><option>غير محدد</option></select></div>
+              </div>
+              <div>
+                <div class="form-group"><label for="sysReportFormat">تنسيق التقارير</label><select class="form-control" id="sysReportFormat"><option selected>PDF</option><option>Excel</option><option>HTML</option></select></div>
+                <div class="form-group"><label for="sysBackup">النسخ الاحتياطي</label><select class="form-control" id="sysBackup"><option selected>يومي</option><option>أسبوعي</option><option>شهري</option></select></div>
+              </div>
+            </div>
+            <button class="btn btn-primary" data-action="save-settings">💾 حفظ الإعدادات</button>
+          </div>
+        </section>
+
+      </div><!-- /content -->
+    </main>
+  </div><!-- /app -->
+
+  <!-- ===== MODAL: ADD CLIENT ===== -->
+  <div class="modal-overlay" id="addClientModal" role="dialog" aria-modal="true" aria-labelledby="addClientTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="addClientTitle">إضافة عميل جديد</h3>
+        <button class="modal-close" data-action="close-modal" data-modal="addClientModal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><label for="newClientName">اسم العميل</label><input type="text" class="form-control" id="newClientName" placeholder="أدخل اسم العميل"></div>
+        <div class="form-group"><label for="newClientEmail">البريد الإلكتروني</label><input type="email" class="form-control" id="newClientEmail" placeholder="email@example.com"></div>
+        <div class="form-group"><label for="newClientPhone">رقم الهاتف</label><input type="text" class="form-control" id="newClientPhone" placeholder="+966 5X XXX XXXX"></div>
+        <div class="form-group"><label for="newClientNotes">ملاحظات</label><textarea class="form-control" id="newClientNotes" placeholder="ملاحظات إضافية..."></textarea></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-action="close-modal" data-modal="addClientModal">إلغاء</button>
+        <button class="btn btn-primary" data-action="confirm-add-client">إضافة العميل</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+
+</body>
+</html>
